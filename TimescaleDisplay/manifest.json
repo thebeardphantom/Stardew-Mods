@@ -1,7 +1,7 @@
 ﻿{
   "Name": "Timescale Display",
   "Author": "thebeardphantom",
-  "Version": "1.3.0",
+  "Version": "1.3.1",
   "Description": "Shows the current timescale in the time-of-day display.",
   "UniqueID": "thebeardphantom.timescale-display",
   "EntryDll": "TimescaleDisplay.dll",
