@@ -27,10 +27,31 @@ namespace TimescaleDisplay
 
         private float _avgTimeScale = 1.0f;
 
+        private string[]? _messageModIDs;
+
         public override void Entry(IModHelper helper)
         {
+            _messageModIDs = new[] { ModManifest.UniqueID, };
             helper.Events.Display.RenderedHud += OnRenderedHud;
             helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
+            helper.Events.Multiplayer.ModMessageReceived += OnModMessageReceived;
+        }
+
+        private void OnModMessageReceived(object? sender, ModMessageReceivedEventArgs e)
+        {
+            if (Context.IsMainPlayer)
+            {
+                return;
+            }
+
+            if (e.FromModID != ModManifest.UniqueID)
+            {
+                return;
+            }
+
+            var timescaleChangeMessage = e.ReadAs<TimescaleChangeMessage>();
+            _avgTimeScale = timescaleChangeMessage.AvgTimeScale;
+            Monitor.Log($"Received {nameof(TimescaleChangeMessage)} with value {_avgTimeScale}.");
         }
 
         private void RenderLabel(SpriteBatch spriteBatch)
@@ -65,6 +86,11 @@ namespace TimescaleDisplay
 
         private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e)
         {
+            if (!Context.IsMainPlayer)
+            {
+                return;
+            }
+
             int gameTimeInterval = Game1.gameTimeInterval;
             int intervalDiff = gameTimeInterval - _gameTimeIntervalLastTick;
             if (intervalDiff >= 0)
@@ -72,13 +98,25 @@ namespace TimescaleDisplay
                 float timeScale = intervalDiff / BaseIntervalOffsetPerTick;
                 _timeScaleMeasurements[_nextTimeScaleIndex] = timeScale;
                 _nextTimeScaleIndex = (_nextTimeScaleIndex + 1) % SpeedMeasurementSampleCount;
-                _avgTimeScale = CalulateAverageTimeScale();
+                float newAvgTimeScale = CalculateAverageTimeScale();
+                if (Math.Abs(newAvgTimeScale - _avgTimeScale) > 0.0001f)
+                {
+                    _avgTimeScale = newAvgTimeScale;
+                    SendToAllPlayers();
+                }
             }
 
             _gameTimeIntervalLastTick = gameTimeInterval;
         }
 
-        private float CalulateAverageTimeScale()
+        private void SendToAllPlayers()
+        {
+            Monitor.Log($"Sending {nameof(TimescaleChangeMessage)} with value {_avgTimeScale} to all players.");
+            var message = new TimescaleChangeMessage(_avgTimeScale);
+            Helper.Multiplayer.SendMessage(message, nameof(TimescaleChangeMessage), _messageModIDs);
+        }
+
+        private float CalculateAverageTimeScale()
         {
             var value = 0f;
             foreach (float measurement in _timeScaleMeasurements)

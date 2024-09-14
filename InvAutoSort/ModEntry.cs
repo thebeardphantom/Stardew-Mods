@@ -7,11 +7,16 @@ namespace InvAutoSort
 {
     public class ModEntry : Mod
     {
+        private const bool ModEnabled = false;
+
         private int _lastOrganizationTick;
 
         public override void Entry(IModHelper helper)
         {
-            helper.Events.Player.InventoryChanged += OnInventoryChanged;
+            if (ModEnabled)
+            {
+                helper.Events.Player.InventoryChanged += OnInventoryChanged;
+            }
         }
 
         private void OnInventoryChanged(object? sender, InventoryChangedEventArgs e)
