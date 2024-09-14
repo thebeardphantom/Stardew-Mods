@@ -1,0 +1,10 @@
+﻿{
+  "Name": "InvAutoSort",
+  "Author": "thebeardphantom",
+  "Version": "0.0.1",
+  "Description": "Automatically sorts the player's inventory when it changes.",
+  "UniqueID": "thebeardphantom.invautosort",
+  "EntryDll": "InvAutoSort.dll",
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": []
+}

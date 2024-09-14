@@ -1,0 +1,10 @@
+﻿{
+  "Name": "Timescale Display",
+  "Author": "thebeardphantom",
+  "Version": "1.0.0",
+  "Description": "Shows the current timescale in the clock.",
+  "UniqueID": "thebeardphantom.timescale-display",
+  "EntryDll": "TimescaleDisplay.dll",
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": []
+}
