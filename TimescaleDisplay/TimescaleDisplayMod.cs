@@ -63,6 +63,11 @@ namespace TimescaleDisplay
 
         private void RenderLabel(SpriteBatch spriteBatch)
         {
+            if (Game1.eventUp)
+            {
+                return;
+            }
+
             var text = $"{_avgTimeScale:0.0}x";
 
             SpriteFont font = Game1.smallFont;
