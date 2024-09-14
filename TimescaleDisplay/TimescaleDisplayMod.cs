@@ -19,6 +19,13 @@ namespace TimescaleDisplay
         /// </summary>
         private const int SpeedMeasurementSampleCount = 3;
 
+        /// <summary>
+        /// This mod's method of measuring timescale isn't precise, so we need to account for
+        /// noise in the sampling. Only update the time scale for networked players
+        /// if the change is greater than or equal to this value.
+        /// </summary>
+        private const float MinNetworkedTimeScaleChange = 0.03f;
+
         private readonly float[] _timeScaleMeasurements = Enumerable.Repeat(1f, SpeedMeasurementSampleCount).ToArray();
 
         private int _gameTimeIntervalLastTick;
@@ -99,10 +106,14 @@ namespace TimescaleDisplay
                 _timeScaleMeasurements[_nextTimeScaleIndex] = timeScale;
                 _nextTimeScaleIndex = (_nextTimeScaleIndex + 1) % SpeedMeasurementSampleCount;
                 float newAvgTimeScale = CalculateAverageTimeScale();
-                if (Math.Abs(newAvgTimeScale - _avgTimeScale) > 0.0001f)
+                float timeScaleChange = Math.Abs(newAvgTimeScale - _avgTimeScale);
+                if (timeScaleChange >= 0.00001f)
                 {
                     _avgTimeScale = newAvgTimeScale;
-                    SendToAllPlayers();
+                    if (timeScaleChange > MinNetworkedTimeScaleChange)
+                    {
+                        SendToAllPlayers();
+                    }
                 }
             }
 
