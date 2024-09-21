@@ -4,15 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version></Version>
-        <Company>thebeardphantom</Company>
-        <Product>Timescale Display</Product>
-        <AssemblyVersion>1.3.1</AssemblyVersion>
-        <FileVersion>1.3.1</FileVersion>
-        <IsPackable>false</IsPackable>
-        <Title></Title>
-        <Authors></Authors>
-        <PackageId />
+        <RootNamespace>BeardPhantom.Stardewtilities</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -25,14 +17,6 @@
       <Reference Include="StardewModdingAPI">
         <HintPath>..\..\..\..\Games\SteamLibrary\steamapps\common\Stardew Valley\StardewModdingAPI.dll</HintPath>
       </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.2.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Stardewtilities\Stardewtilities.csproj" />
     </ItemGroup>
 
 </Project>

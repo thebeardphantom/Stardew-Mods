@@ -1,11 +1,11 @@
 namespace TimescaleDisplay
 {
     [Serializable]
-    public struct TimescaleChangeMessage
+    public struct ChangeNetworkMessage
     {
         public float AvgTimeScale { get; set; }
 
-        public TimescaleChangeMessage(float avgTimeScale)
+        public ChangeNetworkMessage(float avgTimeScale)
         {
             AvgTimeScale = avgTimeScale;
         }
