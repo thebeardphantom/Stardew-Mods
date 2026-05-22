@@ -1,11 +1,11 @@
 ﻿{
   "Name": "Timescale Display",
   "Author": "thebeardphantom",
-  "Version": "1.4.0",
+  "Version": "1.5.0",
   "Description": "Shows the current timescale in the time-of-day display.",
   "UniqueID": "thebeardphantom.timescale-display",
   "EntryDll": "TimescaleDisplay.dll",
-  "MinimumApiVersion": "4.0.0",
+  "MinimumApiVersion": "4.1.0",
   "UpdateKeys": [
     "Nexus:27764"
   ]

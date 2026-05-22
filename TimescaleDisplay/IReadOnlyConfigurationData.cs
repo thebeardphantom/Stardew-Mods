@@ -5,6 +5,8 @@ namespace TimescaleDisplay
     public interface IReadOnlyConfigurationData
     {
         bool DisplayEnabled { get; }
+        
+        bool RenderAboveHud { get; }
 
         int RenderOffsetX { get; }
 
@@ -18,6 +20,6 @@ namespace TimescaleDisplay
 
         public Color ColorBackground { get; }
 
-        bool DrawShadow { get; }
+        bool RenderShadow { get; }
     }
 }

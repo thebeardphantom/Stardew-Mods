@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimescaleDisplay", "Timesca
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stardewtilities", "Stardewtilities\Stardewtilities.csproj", "{52F2C931-E3B6-4A83-B569-9B38D53CD8BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DawnOfTheFinalDay", "DawnOfTheFinalDay\DawnOfTheFinalDay.csproj", "{DDFFDD8C-60BD-4428-A501-95ABA970A9E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{52F2C931-E3B6-4A83-B569-9B38D53CD8BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52F2C931-E3B6-4A83-B569-9B38D53CD8BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52F2C931-E3B6-4A83-B569-9B38D53CD8BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDFFDD8C-60BD-4428-A501-95ABA970A9E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDFFDD8C-60BD-4428-A501-95ABA970A9E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDFFDD8C-60BD-4428-A501-95ABA970A9E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDFFDD8C-60BD-4428-A501-95ABA970A9E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

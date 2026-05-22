@@ -19,26 +19,28 @@ namespace TimescaleDisplay
         {
             _configuration = configuration;
             _calculator = calculator;
+            helper.Events.Display.RenderingHud += OnRenderingHud;
             helper.Events.Display.RenderedHud += OnRenderedHud;
+        }
+
+        private void OnRenderingHud(object? sender, RenderingHudEventArgs e)
+        {
+            RenderLabel(e.SpriteBatch, HudRenderPhase.Rendering);
         }
 
         private void OnRenderedHud(object? sender, RenderedHudEventArgs e)
         {
-            RenderLabel(e.SpriteBatch);
+            RenderLabel(e.SpriteBatch, HudRenderPhase.Rendered);
         }
 
-        private void RenderLabel(SpriteBatch spriteBatch)
+        private void RenderLabel(SpriteBatch spriteBatch, HudRenderPhase phase)
         {
-            if (!Game1.displayHUD)
+            if (!CheckShouldRender(phase))
             {
                 return;
             }
 
             IReadOnlyConfigurationData config = _configuration.Data;
-            if (!config.DisplayEnabled)
-            {
-                return;
-            }
 
             float avgTimeScale = _calculator.AvgTimescale;
             var text = $"{avgTimeScale:0.0}x";
@@ -63,7 +65,7 @@ namespace TimescaleDisplay
             }
 
             var labelPosition = labelRect.GetOffsetLocationForAnchor(RectAnchor.Right).ToVector2();
-            if (config.DrawShadow)
+            if (config.RenderShadow)
             {
                 var shadowColor = new Color(Color.Black, config.Color.A);
                 Utility.drawTextWithColoredShadow(
@@ -88,6 +90,37 @@ namespace TimescaleDisplay
                     SpriteEffects.None,
                     0f);
             }
+        }
+
+        private bool CheckShouldRender(HudRenderPhase phase)
+        {
+            if (!_configuration.Data.DisplayEnabled)
+            {
+                return false;
+            }
+
+            bool wouldRenderAboveHud = phase == HudRenderPhase.Rendered;
+            if (_configuration.Data.RenderAboveHud != wouldRenderAboveHud)
+            {
+                return false;
+            }
+
+            if (Game1.isFestival())
+            {
+                return false;
+            }
+
+            if (Game1.eventUp)
+            {
+                return false;
+            }
+
+            if (!Game1.displayHUD)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

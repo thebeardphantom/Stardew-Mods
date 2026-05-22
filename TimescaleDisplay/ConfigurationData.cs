@@ -13,6 +13,8 @@ namespace TimescaleDisplay
 
         public bool DisplayEnabled { get; set; }
 
+        public bool RenderAboveHud { get; set; }
+
         public int RenderOffsetX { get; set; }
 
         public int RenderOffsetY { get; set; }
@@ -25,18 +27,19 @@ namespace TimescaleDisplay
 
         public Color ColorBackground { get; set; }
 
-        public bool DrawShadow { get; set; }
+        public bool RenderShadow { get; set; }
 
         public void OverwriteFrom(ConfigurationData other)
         {
             DisplayEnabled = other.DisplayEnabled;
             RenderOffsetX = other.RenderOffsetX;
             RenderOffsetY = other.RenderOffsetY;
+            RenderAboveHud = other.RenderAboveHud;
             Scale = other.Scale;
             ShowBackground = other.ShowBackground;
             Color = other.Color;
             ColorBackground = other.ColorBackground;
-            DrawShadow = other.DrawShadow;
+            RenderShadow = other.RenderShadow;
         }
 
         public ConfigurationData Reset()
@@ -46,9 +49,10 @@ namespace TimescaleDisplay
             RenderOffsetY = 90;
             Scale = 1.333f;
             ShowBackground = true;
+            RenderAboveHud = true;
             Color = new Color(Color.White, DefaultAlpha);
             ColorBackground = new Color(Color.Black, DefaultAlpha / 2f);
-            DrawShadow = true;
+            RenderShadow = true;
             return this;
         }
 

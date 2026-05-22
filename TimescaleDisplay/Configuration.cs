@@ -98,14 +98,19 @@ namespace TimescaleDisplay
                         _dataRealtime.DisplayEnabled = boolValue;
                         break;
                     }
+                    case nameof(ConfigurationData.RenderAboveHud):
+                    {
+                        _dataRealtime.RenderAboveHud = boolValue;
+                        break;
+                    }
                     case nameof(ConfigurationData.ShowBackground):
                     {
                         _dataRealtime.ShowBackground = boolValue;
                         break;
                     }
-                    case nameof(ConfigurationData.DrawShadow):
+                    case nameof(ConfigurationData.RenderShadow):
                     {
-                        _dataRealtime.DrawShadow = boolValue;
+                        _dataRealtime.RenderShadow = boolValue;
                         break;
                     }
                 }
@@ -138,6 +143,15 @@ namespace TimescaleDisplay
                 getValue: () => _dataSaved.DisplayEnabled,
                 setValue: value => _dataSaved.DisplayEnabled = value,
                 fieldId: nameof(ConfigurationData.DisplayEnabled)
+            );
+            
+            _configMenuApi.AddBoolOption(
+                _manifest,
+                name: () => "Render Above HUD",
+                tooltip: () => "Toggles whether the timescale is rendered above or below the vanilla HUD.",
+                getValue: () => _dataSaved.RenderAboveHud,
+                setValue: value => _dataSaved.RenderAboveHud = value,
+                fieldId: nameof(ConfigurationData.RenderAboveHud)
             );
 
             _configMenuApi.AddNumberOption(
@@ -191,11 +205,11 @@ namespace TimescaleDisplay
             _configMenuApi!.AddSectionTitle(_manifest, () => "Label");
             _configMenuApi.AddBoolOption(
                 _manifest,
-                name: () => "Draw Shadow",
-                tooltip: () => "Toggles the label has a shadow drawn.",
-                getValue: () => _dataSaved.DrawShadow,
-                setValue: value => _dataSaved.DrawShadow = value,
-                fieldId: nameof(ConfigurationData.DrawShadow)
+                name: () => "Render Shadow",
+                tooltip: () => "Toggles if the label has a shadow.",
+                getValue: () => _dataSaved.RenderShadow,
+                setValue: value => _dataSaved.RenderShadow = value,
+                fieldId: nameof(ConfigurationData.RenderShadow)
             );
             _configMenuOptionsApi!.AddColorOption(
                 _manifest,
